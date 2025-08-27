@@ -1,0 +1,222 @@
+.home-container {
+  padding: 6rem 2rem;
+  text-align: center;
+  animation: fadein 1s ease-out;
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.home-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.home-subtitle {
+  font-size: 1.3rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: #bbbbbb;
+}
+
+.pixel-char {
+  width: 200px;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* === BOUTON CHAKRA === */
+.button {
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+  border: 0;
+  color: white;
+  background-color: #8d5dfc;
+  padding: 0.75rem 1.5rem;
+  border-radius: 15px;
+  cursor: pointer;
+  background-size: 200%;
+  transition: background 0.4s ease, color 0.4s ease;
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-image: linear-gradient(90deg,
+    #8d5dfc 0%,
+    #a07aff 50%,
+    #c6a3ff 75%,
+    #e6d6ff 100%);
+  color: white; /* reste blanc au hover */
+  animation: slide 6s linear infinite;
+}
+
+.button:focus,
+.button:active {
+  color: white;
+  background-color: #8d5dfc;
+  outline: none;
+  box-shadow: none;
+}
+
+
+@keyframes slide {
+  100% {
+    background-position: 50rem;
+  }
+}
+
+a {
+  color: #ffffff;
+}
+
+
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.skills {
+  margin-top: 2rem;
+  text-align: left;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.skills-title {
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+  color: #bbbbbb;
+  font-size: 1.1rem;
+}
+
+.skills-list li {
+  margin-bottom: 1.2rem;
+}
+
+.skill-bar {
+  background-color: #333;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 12px;
+  margin-top: 0.3rem;
+}
+
+.skill-bar .fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8d5dfc, #a07aff);
+  transition: width 0.6s ease;
+}
+
+
+.skill-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.skill-percent {
+  font-size: 0.95rem;
+  color: #bbbbbb;
+}
+
+.skill-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.skill-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.skill-comment {
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  font-size: 0.95rem;
+  color: #bbbbbb;
+  margin-top: 0.5rem;
+  max-width: 500px;
+}
+
+.skill-item:hover .skill-comment {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === ZOOM AU HOVER SUR LES BARRES === */
+.skill-bar {
+  /* déjà présent : height, background, border-radius… */
+  transition: transform 0.3s ease;
+  transform-origin: center;   /* pour un scale centré */
+}
+
+.skill-item:hover .skill-bar {
+  transform: scale(1.05);
+}
+
+.about-section {
+  margin-top: 5rem;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.about-title {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 2rem; /* ↖️ espace sous le titre */
+}
+
+.about-text {
+  font-size: 1.15rem;
+  max-width: 950px;
+  margin: 0 auto;
+  color: #cccccc;
+  line-height: 1.8; /* ↖️ espace entre les lignes */
+  letter-spacing: 0.3px;
+}
+
+.about-section {
+  margin-top: 2.5rem;
+  margin-bottom: 10rem; /* ↖️ espace avant le footer */
+  padding: 3rem 2rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.about-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+

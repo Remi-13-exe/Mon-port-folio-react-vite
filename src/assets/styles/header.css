@@ -1,0 +1,32 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: transparent; /* pas de couleur */
+  padding: 1rem 2rem;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: flex-end; /* aligne à droite */
+}
+
+.nav-bar ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-bar a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-bar a:hover,
+.nav-bar .active {
+  color: #8d5dfc;
+}
