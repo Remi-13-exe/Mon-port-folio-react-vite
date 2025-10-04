@@ -1,18 +1,47 @@
+/* === SECTION HOME === */
 .home-container {
+  position: relative;
   padding: 6rem 2rem;
   text-align: center;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  overflow: hidden;
   animation: fadein 1s ease-out;
 }
 
+/* Animation fade-in */
 @keyframes fadein {
   from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
+/* === Overlay noir + dégradé violet === */
+.home-container::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+
+  background: linear-gradient(
+    to bottom, 
+    rgba(141, 93, 252, 0.15), 
+    rgba(0,0,0,0.4)
+  );
+
+  z-index: -2;
+}
+
+/* === TITRES === */
 .home-title {
   font-size: 3rem;
   margin-bottom: 1rem;
   color: #ffffff;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
 }
 
 .home-subtitle {
@@ -20,8 +49,10 @@
   max-width: 600px;
   margin: 0 auto 2rem;
   color: #bbbbbb;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
+/* === PIXEL CHAR === */
 .pixel-char {
   width: 200px;
   animation: float 4s ease-in-out infinite;
@@ -29,68 +60,86 @@
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50%      { transform: translateY(-10px); }
 }
 
-/* === BOUTON CHAKRA === */
-.button {
-  font-family: 'Poppins', sans-serif;
-  font-size: 17px;
-  font-weight: bold;
-  border: 0;
-  color: white;
-  background-color: #8d5dfc;
-  padding: 0.75rem 1.5rem;
-  border-radius: 15px;
-  cursor: pointer;
-  background-size: 200%;
-  transition: background 0.4s ease, color 0.4s ease;
-  display: inline-block;
-  width: auto;
-  max-width: 100%;
-  white-space: nowrap;
-  text-decoration: none;
-}
-
-.button:hover {
-  background-image: linear-gradient(90deg,
-    #8d5dfc 0%,
-    #a07aff 50%,
-    #c6a3ff 75%,
-    #e6d6ff 100%);
-  color: white; /* reste blanc au hover */
-  animation: slide 6s linear infinite;
-}
-
-.button:focus,
-.button:active {
-  color: white;
-  background-color: #8d5dfc;
-  outline: none;
-  box-shadow: none;
-}
-
-
-@keyframes slide {
-  100% {
-    background-position: 50rem;
-  }
-}
-
-a {
-  color: #ffffff;
-}
-
-
-
+/* === BOUTONS AVANCÉS 3D & GLOW === */
 .button-group {
   display: flex;
   gap: 1rem;
   justify-content: center;
   margin-bottom: 2rem;
   flex-wrap: wrap;
+  perspective: 1000px; /* pour effet 3D */
 }
 
+.box-button {
+  display: inline-block;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  user-select: none;
+  background: transparent;
+  position: relative;
+}
+
+.button {
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+  color: #fff;
+  padding: 0.85rem 2rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #8d5dfc, #c6a3ff);
+  border: none;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.35), 0 4px 6px rgba(0,0,0,0.2);
+  display: inline-block;
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.button span {
+  position: relative;
+  z-index: 1;
+  letter-spacing: 1px;
+}
+
+.button:hover {
+  transform: translateY(-5px) scale(1.05) rotateX(3deg) rotateY(3deg);
+  box-shadow: 0 20px 35px rgba(0,0,0,0.5), 0 8px 15px rgba(0,0,0,0.25);
+  filter: brightness(1.2);
+}
+
+.button:hover::before {
+  transform: rotate(45deg) scale(1);
+  opacity: 1;
+}
+
+.button:active {
+  transform: translateY(2px) scale(0.98) rotateX(0deg) rotateY(0deg);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+  filter: brightness(0.95);
+}
+
+/* === SKILLS === */
 .skills {
   margin-top: 2rem;
   text-align: left;
@@ -104,6 +153,7 @@ a {
   color: #ffffff;
   margin-bottom: 1rem;
   text-align: center;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
 .skills-list {
@@ -123,6 +173,8 @@ a {
   overflow: hidden;
   height: 12px;
   margin-top: 0.3rem;
+  transition: transform 0.3s ease;
+  transform-origin: center;
 }
 
 .skill-bar .fill {
@@ -130,7 +182,6 @@ a {
   background: linear-gradient(90deg, #8d5dfc, #a07aff);
   transition: width 0.6s ease;
 }
-
 
 .skill-label {
   display: flex;
@@ -157,11 +208,11 @@ a {
   transform: translateY(0);
 }
 
-
 .skill-comment {
   opacity: 0;
   transform: translateY(5px);
   transition: opacity 0.3s ease, transform 0.3s ease;
+
   font-size: 0.95rem;
   color: #bbbbbb;
   margin-top: 0.5rem;
@@ -173,43 +224,17 @@ a {
   transform: translateY(0);
 }
 
-/* === ZOOM AU HOVER SUR LES BARRES === */
-.skill-bar {
-  /* déjà présent : height, background, border-radius… */
-  transition: transform 0.3s ease;
-  transform-origin: center;   /* pour un scale centré */
-}
-
 .skill-item:hover .skill-bar {
   transform: scale(1.05);
 }
 
-.about-section {
-  margin-top: 5rem;
-  padding: 3rem 2rem;
-  text-align: center;
-}
-
-.about-title {
-  font-size: 2rem;
-  color: #ffffff;
-  margin-bottom: 2rem; /* ↖️ espace sous le titre */
-}
-
-.about-text {
-  font-size: 1.15rem;
-  max-width: 950px;
-  margin: 0 auto;
-  color: #cccccc;
-  line-height: 1.8; /* ↖️ espace entre les lignes */
-  letter-spacing: 0.3px;
-}
-
+/* === ABOUT SECTION === */
 .about-section {
   margin-top: 2.5rem;
-  margin-bottom: 10rem; /* ↖️ espace avant le footer */
+  margin-bottom: 10rem;
   padding: 3rem 2rem;
   text-align: center;
+
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -220,3 +245,64 @@ a {
   transform: translateY(0);
 }
 
+.about-title {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.about-text {
+  font-size: 1.15rem;
+  max-width: 950px;
+  margin: 0 auto;
+  color: #cccccc;
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+}
+
+/* === GLOBAL LINKS === */
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* === Gamabunta & Gamaken (décors immersifs) === */
+.deco-gamabunta {
+  position: fixed;
+  top: -100px;
+  left: -150px;
+  width: 1400px;
+  height: auto;
+  z-index: -2;
+  opacity: 0.5;
+  filter: blur(12px) brightness(0.6);
+  pointer-events: none;
+  animation: float-gamabunta 20s ease-in-out infinite alternate;
+}
+
+.deco-gamaken {
+  position: fixed;
+  bottom: -10px;
+  right: -150px;
+  width: 1300px;
+  height: auto;
+  z-index: -2;
+  opacity: 0.5;
+  filter: blur(14px) brightness(0.65);
+  pointer-events: none;
+  animation: float-gamaken 25s ease-in-out infinite alternate-reverse;
+}
+
+/* === Animation parallèle === */
+@keyframes float-gamabunta {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(20px, 15px) scale(1.03); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes float-gamaken {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(-20px, -15px) scale(1.03); }
+  100% { transform: translate(0, 0) scale(1); }
+}
