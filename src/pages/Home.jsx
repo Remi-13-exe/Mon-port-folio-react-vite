@@ -1,21 +1,20 @@
 // src/pages/Home.jsx
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../assets/styles/Home.css";
 import ermiteGif from "../assets/ermite.gif";
 import gamabuntaGif from "../assets/gamabunta.gif";
 import gamakenGif from "../assets/gamaken.gif";
+import cvFile from "../assets/Godji-remi.pdf";
 
 function Home() {
-  const [showSmoke, setShowSmoke] = useState(false);
   const [cvDownloading, setCvDownloading] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
+          if (entry.isIntersecting) entry.target.classList.add("visible");
         });
       },
       { threshold: 0.5 }
@@ -34,14 +33,13 @@ function Home() {
 
   const handleCvDownload = () => {
     setCvDownloading(true);
-    // Simule le téléchargement pour le feedback visuel
     const link = document.createElement("a");
-    link.href = "/cv.pdf";
-    link.download = "CV_RemI.pdf";
+    link.href = cvFile;
+    link.download = "Godji-Remi.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    setTimeout(() => setCvDownloading(false), 1500); // reset après 1,5s
+    setTimeout(() => setCvDownloading(false), 1500);
   };
 
   return (
@@ -57,6 +55,7 @@ function Home() {
           alt="Perso pixel qui marche"
           className="pixel-char"
         />
+
         <p className="home-subtitle">
           Développeur web en formation, je conçois des interfaces interactives et
           réalise des projets variés : sites React responsives, API fonctionnelles,
@@ -65,11 +64,11 @@ function Home() {
         </p>
 
         <div className="button-group">
-          <a href="/projects" className="box-button">
+          <Link to="/projects" className="box-button">
             <div className="button">
               <span>Voir mes projets</span>
             </div>
-          </a>
+          </Link>
 
           <div
             className="box-button"
@@ -77,7 +76,9 @@ function Home() {
             style={{ cursor: "pointer" }}
           >
             <div className="button">
-              <span>{cvDownloading ? "Téléchargement…" : "📄 Voir mon CV"}</span>
+              <span>
+                {cvDownloading ? "Téléchargement…" : "📄 Voir mon CV"}
+              </span>
             </div>
           </div>
         </div>
@@ -86,14 +87,54 @@ function Home() {
           <h2 className="skills-title">Compétences</h2>
           <ul className="skills-list">
             {[
-              { name: "ReactJS", percent: 65, comment: "Création de projets React complets, composants réutilisables, gestion d’état et navigation avec React Router. Exemple : portfolio interactif et 'Trouve ton artisan'." },
-              { name: "Node.js / Express.js", percent: 70, comment: "Développement d’API REST sécurisées, routes, middlewares et gestion des données côté serveur. Exemple : API du port de plaisance Russel." },
-              { name: "SQL / MySQL", percent: 85, comment: "Modélisation et gestion de bases de données relationnelles, création de tables, jointures et requêtes avancées. Exemple : site Tifosi et 'Trouve ton artisan'." },
-              { name: "MongoDB / NoSQL", percent: 60, comment: "Gestion de collections et documents, intégration avec Express.js pour API non relationnelles. Exemple : port de plaisance Russel." },
-              { name: "Figma", percent: 55, comment: "Conception de maquettes interactives et responsive, prototypage d’interfaces modernes pour web et mobile. Exemple : Maquette-Probeats." },
-              { name: "HTML / CSS / Sass", percent: 80, comment: "Création de sites statiques ou dynamiques, responsive design et bonnes pratiques de structure. Exemple : CV en ligne et projets React." },
-              { name: "Git / GitHub", percent: 65, comment: "Versioning, branches et collaboration sur projets multiples, gestion de repos et intégration continue." },
-              { name: "Anglais (B1)", percent: 60, comment: "Capacité à comprendre la documentation technique et à collaborer avec des sources en anglais." },
+              {
+                name: "ReactJS",
+                percent: 65,
+                comment:
+                  "Création de projets React complets, composants réutilisables, gestion d’état et navigation avec React Router. Exemple : portfolio interactif et 'Trouve ton artisan'.",
+              },
+              {
+                name: "Node.js / Express.js",
+                percent: 70,
+                comment:
+                  "Développement d’API REST sécurisées, routes, middlewares et gestion des données côté serveur. Exemple : API du port de plaisance Russel.",
+              },
+              {
+                name: "SQL / MySQL",
+                percent: 85,
+                comment:
+                  "Modélisation et gestion de bases de données relationnelles, création de tables, jointures et requêtes avancées. Exemple : site Tifosi et 'Trouve ton artisan'.",
+              },
+              {
+                name: "MongoDB / NoSQL",
+                percent: 60,
+                comment:
+                  "Gestion de collections et documents, intégration avec Express.js pour API non relationnelles. Exemple : port de plaisance Russel.",
+              },
+              {
+                name: "Figma",
+                percent: 55,
+                comment:
+                  "Conception de maquettes interactives et responsive, prototypage d’interfaces modernes pour web et mobile. Exemple : Maquette-Probeats.",
+              },
+              {
+                name: "HTML / CSS / Sass",
+                percent: 80,
+                comment:
+                  "Création de sites statiques ou dynamiques, responsive design et bonnes pratiques de structure. Exemple : CV en ligne et projets React.",
+              },
+              {
+                name: "Git / GitHub",
+                percent: 65,
+                comment:
+                  "Versioning, branches et collaboration sur projets multiples, gestion de repos et intégration continue.",
+              },
+              {
+                name: "Anglais (B1)",
+                percent: 60,
+                comment:
+                  "Capacité à comprendre la documentation technique et à collaborer avec des sources en anglais.",
+              },
             ].map((skill, i) => (
               <li key={i} className="skill-item">
                 <div className="skill-label">
@@ -101,7 +142,10 @@ function Home() {
                   <span className="skill-percent">{skill.percent}%</span>
                 </div>
                 <div className="skill-bar">
-                  <div className="fill" style={{ width: `${skill.percent}%` }}></div>
+                  <div
+                    className="fill"
+                    style={{ width: `${skill.percent}%` }}
+                  ></div>
                 </div>
                 <div className="skill-comment">{skill.comment}</div>
               </li>

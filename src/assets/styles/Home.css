@@ -24,17 +24,15 @@
 .home-container::after {
   content: "";
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-
-  background: linear-gradient(
-    to bottom, 
-    rgba(141, 93, 252, 0.15), 
-    rgba(0,0,0,0.4)
-  );
-
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background: linear-gradient(); /* vide = rien affiché */
   z-index: -2;
 }
+
+
 
 /* === TITRES === */
 .home-title {
@@ -70,7 +68,7 @@
   justify-content: center;
   margin-bottom: 2rem;
   flex-wrap: wrap;
-  perspective: 1000px; /* pour effet 3D */
+  perspective: 1000px;
 }
 
 .box-button {
@@ -212,7 +210,6 @@
   opacity: 0;
   transform: translateY(5px);
   transition: opacity 0.3s ease, transform 0.3s ease;
-
   font-size: 0.95rem;
   color: #bbbbbb;
   margin-top: 0.5rem;
@@ -234,7 +231,6 @@
   margin-bottom: 10rem;
   padding: 3rem 2rem;
   text-align: center;
-
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -268,33 +264,19 @@ a {
 }
 
 /* === Gamabunta & Gamaken (décors immersifs) === */
-.deco-gamabunta {
+.deco-gamabunta, .deco-gamaken {
   position: fixed;
-  top: -100px;
-  left: -150px;
   width: 1400px;
   height: auto;
   z-index: -2;
   opacity: 0.5;
   filter: blur(12px) brightness(0.6);
   pointer-events: none;
-  animation: float-gamabunta 20s ease-in-out infinite alternate;
 }
 
-.deco-gamaken {
-  position: fixed;
-  bottom: -10px;
-  right: -150px;
-  width: 1300px;
-  height: auto;
-  z-index: -2;
-  opacity: 0.5;
-  filter: blur(14px) brightness(0.65);
-  pointer-events: none;
-  animation: float-gamaken 25s ease-in-out infinite alternate-reverse;
-}
+.deco-gamabunta { top: -100px; left: -150px; animation: float-gamabunta 20s ease-in-out infinite alternate; }
+.deco-gamaken { bottom: -10px; right: -150px; animation: float-gamaken 25s ease-in-out infinite alternate-reverse; }
 
-/* === Animation parallèle === */
 @keyframes float-gamabunta {
   0%   { transform: translate(0, 0) scale(1); }
   50%  { transform: translate(20px, 15px) scale(1.03); }
@@ -305,4 +287,38 @@ a {
   0%   { transform: translate(0, 0) scale(1); }
   50%  { transform: translate(-20px, -15px) scale(1.03); }
   100% { transform: translate(0, 0) scale(1); }
+}
+
+/* === MEDIA QUERIES RESPONSIVE === */
+
+/* Mobile */
+@media (max-width: 600px) {
+  .home-title { font-size: 2rem; }
+  .home-subtitle { font-size: 1rem; max-width: 90%; }
+  .pixel-char { width: 140px; }
+  .button-group { flex-direction: column; gap: 1rem; }
+  .button { font-size: 15px; padding: 0.6rem 1.4rem; }
+  .skills-list li { font-size: 0.95rem; }
+  .skill-bar { height: 10px; }
+  .about-title { font-size: 1.5rem; }
+  .about-text { font-size: 1rem; line-height: 1.5; padding: 0 1rem; }
+  .deco-gamabunta, .deco-gamaken { width: 800px; opacity: 0.4; }
+}
+
+/* Tablette */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .home-title { font-size: 2.5rem; }
+  .home-subtitle { font-size: 1.1rem; max-width: 80%; }
+  .pixel-char { width: 160px; }
+  .button { font-size: 16px; padding: 0.7rem 1.6rem; }
+  .skills-list li { font-size: 1rem; }
+  .skill-bar { height: 11px; }
+  .about-title { font-size: 1.75rem; }
+  .about-text { font-size: 1.05rem; }
+  .deco-gamabunta, .deco-gamaken { width: 1100px; opacity: 0.45; }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  /* Rien à changer, utilisation de la version principale */
 }

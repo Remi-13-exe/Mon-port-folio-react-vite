@@ -2,13 +2,15 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  background: transparent; /* pas de couleur */
+  backdrop-filter: blur(2px); /* flou très léger */
+  background-color: rgba(0, 0, 0, 0.10); /* semi-transparent pour voir le flou */
   padding: 1rem 2rem;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease;
 }
 
 .nav-bar {
   display: flex;
-  justify-content: flex-end; /* aligne à droite */
+  justify-content: flex-end;
 }
 
 .nav-bar ul {
