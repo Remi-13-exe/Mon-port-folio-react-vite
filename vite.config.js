@@ -1,8 +1,14 @@
-// vite.config.js
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import history from 'connect-history-api-fallback'
 
 export default defineConfig({
   plugins: [react()],
-  base: "/Mon-port-folio-react-vite/", // 👈 très important
-});
+  server: {
+    middlewareMode: false,
+    setupMiddlewares(middlewares) {
+      middlewares.use(history())
+      return middlewares
+    },
+  },
+})
